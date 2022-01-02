@@ -41,6 +41,6 @@ app.put("/image", (req,res) => {image.hanldeimage(req,res,db)});
 
 app.post("/imageurl", (req, res) => {image.apiCall(req,res)});
 
-app.listen( 3000, () => {
+app.listen( process.env.PORT || 3000, () => {
   console.log("Success!");
 });
