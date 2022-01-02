@@ -24,7 +24,7 @@ app.use(cors());
 
 //Home
 app.get("/", (req, res) => {
-  res.json("HEllo");
+  res.json("Hello");
 });
 
 //SignIn --> post req with sucess/failure
