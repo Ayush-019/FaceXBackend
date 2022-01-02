@@ -14,14 +14,17 @@ const apiCall = (req,res) => {
 
 const hanldeimage = (req, res, db) => {
   const { id } = req.body;
-  db("users")
-    .where("id", "=", id)
-    .increment("entries", 1)
-    .returning("entries")
-    .then((entries) => {
-      res.json(entries[0]);
-    })
-    .catch((err) => res.status(400).json("Error getting entries"));
+  // db("users")
+  //   .where("id", "=", id)
+  //  db.query(`SELECT * FROM users where id = '${id}';`)
+      db.query(`UPDATE users SET entries = entries + 1 WHERE id = '${id}'`)
+        //  .increment("entries", 1)
+      db.query(`SELECT entries FROM users where id = '${id}';`)
+        // .returning("entries")
+        .then((entries) => {
+          res.json(entries.rows[0]);
+        })
+        .catch((err) => res.status(400).json("Error getting entries"));
 };
 
 module.exports = {

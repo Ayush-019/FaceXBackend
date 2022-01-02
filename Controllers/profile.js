@@ -1,12 +1,14 @@
-const handleprofile = (req, res) => {
+const handleprofile = (req, res,db) => {
   const { id } = req.params;
   let found = false;
-  db.select("*")
-    .from("users")
-    .where({ id: id })
+  // db.select("*")
+  //   .from("users")
+  //   .where({ id: id })
+  db.query(`SELECT * FROM users where id = '${id}';`)
     .then((user) => {
-      if (user.length) {
-        console.log(user[0]);
+      if (user.rows.length) {
+        console.log(user.rows[0]);
+        res.json(user.rows[0]);
       } else {
         res.status(400).json("user not found!");
       }
